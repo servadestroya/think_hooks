@@ -30,7 +30,7 @@ install:
     - wget https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.sh && chmod +x checkout-deps.sh
     - ./checkout-deps.sh
     #- sudo ln -s /usr/include/asm-generic /usr/include/asm
-    - mkdir -r $TRAVIS_BUILD_DIR/../include/asm
+    - mkdir -p $TRAVIS_BUILD_DIR/../include/asm
     - cp -r /usr/include/asm-generic/* $TRAVIS_BUILD_DIR/../include/asm/
     
 script:
