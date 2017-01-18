@@ -1,7 +1,7 @@
 language: cpp
 compiler:
     - gcc
-#sudo: false
+sudo: false
 addons:
     apt:
         packages:
@@ -27,9 +27,10 @@ install:
     - cd $TRAVIS_BUILD_DIR/../
     - wget https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.sh && chmod +x checkout-deps.sh
     - ./checkout-deps.sh
-    - sudo ln -s /usr/include/asm-generic /usr/include/asm
+    #- sudo ln -s /usr/include/asm-generic /usr/include/asm
     
 script:
     - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
+    - export CPLUS_INCLUDE_PATH=/usr/include/asm-generic
     - CXX=g++-5 CC=gcc-5 python ../configure.py --enable-optimize
     - ambuild
