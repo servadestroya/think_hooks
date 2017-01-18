@@ -40,6 +40,12 @@ ThinkHooks g_ThinkHooks;		/**< Global singleton for extension's main interface *
 
 SMEXT_LINK(&g_ThinkHooks);
 
+const sp_nativeinfo_t MyNatives[] =
+{
+	{ "RequestThink",	sm_AddThinkAction },
+	{ NULL,			NULL },
+};
+
 class ForwardNativeHelpers :
 	public IHandleTypeDispatch
 {

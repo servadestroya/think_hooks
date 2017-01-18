@@ -60,8 +60,6 @@ private:
 	IMutex *m_pMutex;
 };
 
-ThinkHooks g_ThinkHooks;
-
 
 /**
  * @brief Sample implementation of the SDK Extension.
