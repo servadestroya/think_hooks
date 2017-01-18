@@ -6,6 +6,7 @@ projectName = 'think_tools'
 # smsdk_ext.cpp will be automatically added later
 sourceFiles = [
   'extension.cpp',
+  'action_buffer.cpp',
 ]
 
 ###############

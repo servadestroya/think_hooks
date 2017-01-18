@@ -36,7 +36,7 @@ void CActionBuffer<Q, M>::RunActions()
 }
 
 template<class Q, class M>
-void CActionBuffer<Q, M>::AddAction(constAction_t & action)
+void CActionBuffer<Q, M>::AddAction(const Action_t & action)
 {
 	m_pMutex->Lock();
 	m_pQueue->push(action);
