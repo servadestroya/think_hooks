@@ -18,7 +18,7 @@ addons:
             - ../mysql-5.0
 env:
     global:
-    - LLVM_ARCHIVE_URI=https://sourcemod.net/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+    - LLVM_ARCHIVE_URI=http://sourcemod.net/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
     
 before_install:
     - wget -nc $LLVM_ARCHIVE_URI -O $HOME/clang+llvm.tar.xz
