@@ -11,6 +11,7 @@ addons:
         - linux-libc-dev
         - g++-multilib
         - g++-5
+        - gcc-5
         sources:
             - ubuntu-toolchain-r-test
     cache:
@@ -39,5 +40,5 @@ install:
     
 script:
     - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
-    - python ../configure.py --enable-optimize
+    - CXX=g++-5 CC=gcc-5 python ../configure.py --enable-optimize
     - ambuild
