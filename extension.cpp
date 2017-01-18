@@ -40,12 +40,6 @@ ThinkHooks g_ThinkHooks;		/**< Global singleton for extension's main interface *
 
 SMEXT_LINK(&g_ThinkHooks);
 
-const sp_nativeinfo_t MyNatives[] =
-{
-	{ "RequestThink",	sm_AddThinkAction },
-	{ NULL,			NULL },
-};
-
 class ForwardNativeHelpers :
 	public IHandleTypeDispatch
 {
@@ -91,6 +85,12 @@ public:
 	HandleType_t GlobalFwdType;
 	HandleType_t PrivateFwdType;
 } g_ForwardNativeHelpers;
+
+const sp_nativeinfo_t MyNatives[] =
+{
+	{ "RequestThink",	sm_AddThinkAction },
+	{ NULL,			NULL },
+};
 
 //Let's declare a hook to IServerGameDLL::Think
 SH_DECL_HOOK1_void(IServerGameDLL, Think, SH_NOATTRIB, 0, bool);
@@ -170,4 +170,29 @@ static void ExecPawnActionFromActionData(void *pData)
 	pForward->Execute(NULL);
 
 	handlesys->FreeHandle(action->handle, &sec);
+}
+
+static cell_t sm_AddThinkAction(IPluginContext *pContext, const cell_t *params)
+{
+	IPluginFunction *pFunction = pContext->GetFunctionById(params[1]);
+	IPlugin *pPlugin = plsys->FindPluginByContext(pContext->GetContext());
+	if (!pFunction)
+	{
+		return pContext->ThrowNativeError("Invalid function id (%X)", params[1]);
+	}
+
+	IChangeableForward *pForward = forwards->CreateForwardEx(NULL, ET_Ignore, 1, NULL, Param_Cell);
+	IdentityToken_t *pIdentity = pContext->GetIdentity();
+	Handle_t Handle = handlesys->CreateHandle(g_ForwardNativeHelpers.PrivateFwdType, pForward, pIdentity, myself->GetIdentity(), NULL);
+	if (Handle == BAD_HANDLE)
+	{
+		forwards->ReleaseForward(pForward);
+		return 0;
+	}
+
+	pForward->AddFunction(pFunction);
+
+	ActionData_t *pData = new ActionData_t(Handle, pPlugin->GetMyHandle(), params[2]);
+	g_ThinkHooks.m_ActionBuffer->AddAction(Action_t(ExecPawnActionFromActionData, pData));
+	return 1;
 }
