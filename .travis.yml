@@ -9,7 +9,7 @@ addons:
         - lib32z1-dev
         - libc6-dev-i386
         - linux-libc-dev
-        - g++-multilib
+        - g++-5-multilib
         - g++-5
         - gcc-5
         sources:
