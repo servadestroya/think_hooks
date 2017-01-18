@@ -31,7 +31,7 @@ install:
     #  && cd $TRAVIS_BUILD_DIR/../ambuild && python setup.py build && sudo python setup.py
     #  install
     #- git clone https://github.com/alliedmodders/metamod-source.git -b 1.10-dev $TRAVIS_BUILD_DIR/../metamod-source
-    #- git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev
+    - git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev
       $TRAVIS_BUILD_DIR/../sourcemod
     - cd $TRAVIS_BUILD_DIR/../
     - wget https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.sh && chmod +x checkout-deps.sh
