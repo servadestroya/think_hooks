@@ -20,3 +20,4 @@ script:
 - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
 - python ../configure.py --enable-optimize
 - ambuild
+
