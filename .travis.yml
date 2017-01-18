@@ -1,6 +1,6 @@
 language: cpp
 compiler:
-    - clang
+    - gcc
 sudo: false
 addons:
     apt:
@@ -39,5 +39,5 @@ install:
     
 script:
     - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
-    - python ../configure.py --enable-optimize  --sdks=episode1,tf2,l4d2,csgo,dota
+    - python ../configure.py --enable-optimize
     - ambuild
