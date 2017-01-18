@@ -15,6 +15,7 @@ addons:
         - g++-5-multilib
         - g++-5
         - gcc-5
+        - linux-headers-generic
         sources:
             - ubuntu-toolchain-r-test
     cache:
@@ -40,7 +41,7 @@ install:
     - cd $TRAVIS_BUILD_DIR/../
     - wget https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.sh && chmod +x checkout-deps.sh
     - ./checkout-deps.sh
-    - ln -s /usr/include/asm-generic /usr/include/asm
+    #- ln -s /usr/include/asm-generic /usr/include/asm
     
 script:
     - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
