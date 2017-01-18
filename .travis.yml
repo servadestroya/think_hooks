@@ -10,9 +10,16 @@ addons:
         - libc6-dev-i386
         - linux-libc-dev
         
+        - libc6-dev-i386
+        - ia32-libs
+        - lib32z1 
+        - lib32z1-dev
+        - libc6-i386
+        
         - lib32gcc-5-dev
         - libgcc-5-dev
         - g++-5-multilib
+        - gcc-5-multilib
         - g++-5
         - gcc-5
         - linux-headers-generic
@@ -41,7 +48,6 @@ install:
     - cd $TRAVIS_BUILD_DIR/../
     - wget https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.sh && chmod +x checkout-deps.sh
     - ./checkout-deps.sh
-    #- ln -s /usr/include/asm-generic /usr/include/asm
     
 script:
     - mkdir $TRAVIS_BUILD_DIR/build && cd $TRAVIS_BUILD_DIR/build
