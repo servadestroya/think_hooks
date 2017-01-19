@@ -41,6 +41,7 @@ script:
     #}
     - CXX=g++-5 CC=gcc-5 python ../configure.py --enable-optimize
     - ambuild
+    
 
 before_deploy: 
     - zip -r think_hooks.zip $TRAVIS_BUILD_DIR/build/package/addons/sourcemod/extensions/ $TRAVIS_BUILD_DIR/build/package/addons/sourcemod/scripting/
