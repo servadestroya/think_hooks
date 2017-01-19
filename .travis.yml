@@ -43,7 +43,9 @@ script:
     - ambuild
     
 before_deploy: 
-    - zip -r think_hooks.zip $TRAVIS_BUILD_DIR/build/package/addons/sourcemod/extensions/ $TRAVIS_BUILD_DIR/build/package/addons/sourcemod/scripting/
+    - cd $TRAVIS_BUILD_DIR/build/package/addons/sourcemod
+    - zip -r $TRAVIS_BUILD_DIR/think_hooks.zip ./extensions/ ./scripting/
+    - cd $TRAVIS_BUILD_DIR
 
 deploy:
     provider: releases
