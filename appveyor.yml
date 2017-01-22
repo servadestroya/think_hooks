@@ -7,7 +7,7 @@ install:
 build_script:
 - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
 - cmd: "\"%VS140COMNTOOLS%VsDevCmd.bat\""
-- cmd: python ..\configure.py --enable-optimize
+- cmd: python ..\configure.py --enable-optimize -s present
 - cmd: C:\Python27\Scripts\ambuild.bat
 
 after_build:
