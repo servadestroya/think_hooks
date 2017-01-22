@@ -39,7 +39,7 @@ script:
     #again, fixing some dumb issues {
     - export CPLUS_INCLUDE_PATH=$(realpath $TRAVIS_BUILD_DIR/../include)
     #}
-    - CXX=g++-5 CC=gcc-5 python ../configure.py --enable-optimize
+    - CXX=g++-5 CC=gcc-5 python ../configure.py --enable-optimize -s present
     - ambuild
     
 before_deploy: 
