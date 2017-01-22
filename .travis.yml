@@ -58,5 +58,5 @@ deploy:
         repo: servadestroya/think_hooks
         tags: true
         branch: master
-    draft: true
-    target_commitish: $TRAVIS_TAG
+    draft: false
+    #target_commitish: $TRAVIS_TAG

@@ -27,6 +27,6 @@ deploy:
   auth_token:
     secure: 8uhxsjkUxH8mjPpKByeSbl2CCP2Y+XdWptDq2GJPI0TMMnfesyyJFXszciO7DvF1
   artifact: $(FILE_TO_UPLOAD_RELATIVE)
-  draft: true
+  draft: false
   on:
     appveyor_repo_tag: true
