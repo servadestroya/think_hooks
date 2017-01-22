@@ -59,3 +59,4 @@ deploy:
         tags: true
         branch: master
     draft: true
+    target_commitish: $TRAVIS_TAG
