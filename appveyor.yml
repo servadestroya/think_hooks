@@ -1,29 +1,35 @@
 install:
-- cmd: git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev %APPVEYOR_BUILD_FOLDER%\..\sourcemod
-- cmd: cd ..
-- cmd: appveyor DownloadFile https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.ps1 -FileName .\checkout-deps.ps1
-- ps: '& ".\checkout-deps.ps1"'
+#- cmd: git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev %APPVEYOR_BUILD_FOLDER%\..\sourcemod
+#- cmd: cd ..
+#- cmd: appveyor DownloadFile https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.ps1 -FileName .\checkout-deps.ps1
+#- ps: '& ".\checkout-deps.ps1"'
+- cmd: echo "installing"
 
 build_script:
-- cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
-- cmd: "\"%VS140COMNTOOLS%VsDevCmd.bat\""
-- cmd: python ..\configure.py --enable-optimize -s present
-- cmd: C:\Python27\Scripts\ambuild.bat
+#- cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
+#- cmd: "\"%VS140COMNTOOLS%VsDevCmd.bat\""
+#- cmd: python ..\configure.py --enable-optimize -s present
+#- cmd: C:\Python27\Scripts\ambuild.bat
+- cmd: echo "building" > %APPVEYOR_BUILD_FOLDER%\file.txt
 
 after_build:
 - cmd: cd %APPVEYOR_BUILD_FOLDER%
-- ps: $env:FILE_TO_UPLOAD = "think_hooks-n{0}-windows.zip" -f (git rev-list --count HEAD)
-- cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
-- cmd: 7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% * 
+#- ps: $env:FILE_TO_UPLOAD = "think_hooks-n{0}-windows.zip" -f (git rev-list --count HEAD)
+- ps: $env:FILE_TO_UPLOAD = "{1}\build\fake-n{0}-windows.zip" -f (git rev-list --count HEAD), $env:APPVEYOR_BUILD_FOLDER
+#- cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
+#- cmd: 7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% * 
+- cmd: 7z a %FILE_TO_UPLOAD% %APPVEYOR_BUILD_FOLDER%\file.txt
 
 artifacts:
-- path: build\*.zip
+#- path: build\*.zip
+- path: $(FILE_TO_UPLOAD)
 
 deploy:
 - provider: GitHub
   auth_token:
     secure: 8uhxsjkUxH8mjPpKByeSbl2CCP2Y+XdWptDq2GJPI0TMMnfesyyJFXszciO7DvF1
-  artifact: /build\\.*\.zip/
+ # artifact: /build\\think_hooks-n[0-9]+-windows\.zip/
+  artifact: $(FILE_TO_UPLOAD)
   draft: false
   on:
     appveyor_repo_tag: true
