@@ -48,5 +48,5 @@ CopyFiles('include', 'addons/sourcemod/scripting/include',
 #)
 
 # Copy binaries.
-for cxx_task in ThinkTools.extensions:
+for cxx_task in ThinkHooks.extensions:
   builder.AddCopy(cxx_task.binary, folder_map['addons/sourcemod/extensions'])
