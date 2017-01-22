@@ -1,0 +1,28 @@
+install:
+- cmd: git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev %APPVEYOR_BUILD_FOLDER%\..\sourcemod
+- cmd: cd ..
+- ps: %APPVEYOR_BUILD_FOLDER%\..\sourcemod\tools\checkout-deps.ps1
+
+build_script:
+- cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
+- cmd: "\"%VS140COMNTOOLS%VsDevCmd.bat\""
+- cmd: python ..\configure.py --enable-optimize
+- cmd: C:\Python27\Scripts\ambuild.bat
+
+after_build:
+- cmd: cd %APPVEYOR_BUILD_FOLDER%
+- cmd: for /f %i in ('git rev-list --count HEAD') do set FILE_TO_UPLOAD=think_hooks-n%i-windows.zip
+- cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
+- cmd: if /i "%APPVEYOR_REPO_TAG%"=="true" (7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% *)
+
+artifacts:
+- path: build\*.zip
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: 8uhxsjkUxH8mjPpKByeSbl2CCP2Y+XdWptDq2GJPI0TMMnfesyyJFXszciO7DvF1
+  artifact: /build\\.*\.zip/
+  draft: false
+  on:
+    appveyor_repo_tag: true
