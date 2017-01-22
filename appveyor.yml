@@ -12,7 +12,7 @@ build_script:
 
 after_build:
 - cmd: cd %APPVEYOR_BUILD_FOLDER%
-- cmd: for /f %i in ('git rev-list --count HEAD') do set FILE_TO_UPLOAD=think_hooks-n%i-windows.zip
+- ps: $env:FILE_TO_UPLOAD = "think_hooks-n{0}-windows.zip" -f (git rev-list --count HEAD)
 - cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
 - cmd: if /i "%APPVEYOR_REPO_TAG%"=="true" (7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% *)
 
