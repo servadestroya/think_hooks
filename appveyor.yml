@@ -15,21 +15,22 @@ build_script:
 after_build:
 - cmd: cd %APPVEYOR_BUILD_FOLDER%
 #- ps: $env:FILE_TO_UPLOAD = "think_hooks-n{0}-windows.zip" -f (git rev-list --count HEAD)
-- ps: $env:FILE_TO_UPLOAD = "{1}\build\fake-n{0}-windows.zip" -f (git rev-list --count HEAD), $env:APPVEYOR_BUILD_FOLDER
+- ps: $env:FILE_TO_UPLOAD_RELATIVE = "build\fake-n{0}-windows.zip" -f (git rev-list --count HEAD)
+- ps: $env:FILE_TO_UPLOAD = "{0}\{1}" -f $env:APPVEYOR_BUILD_FOLDER, $env:FILE_TO_UPLOAD_RELATIVE
 #- cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
 #- cmd: 7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% * 
 - cmd: 7z a %FILE_TO_UPLOAD% %APPVEYOR_BUILD_FOLDER%\file.txt
 
 artifacts:
 #- path: build\*.zip
-- path: $(FILE_TO_UPLOAD)
+- path: $(FILE_TO_UPLOAD_RELATIVE)
 
 deploy:
 - provider: GitHub
   auth_token:
     secure: 8uhxsjkUxH8mjPpKByeSbl2CCP2Y+XdWptDq2GJPI0TMMnfesyyJFXszciO7DvF1
  # artifact: /build\\think_hooks-n[0-9]+-windows\.zip/
-  artifact: $(FILE_TO_UPLOAD)
+  artifact: $(FILE_TO_UPLOAD_RELATIVE)
   draft: false
   on:
     appveyor_repo_tag: true
