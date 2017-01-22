@@ -15,11 +15,12 @@ build_script:
 after_build:
 - cmd: cd %APPVEYOR_BUILD_FOLDER%
 #- ps: $env:FILE_TO_UPLOAD = "think_hooks-n{0}-windows.zip" -f (git rev-list --count HEAD)
-- ps: $env:FILE_TO_UPLOAD_RELATIVE = "build\fake-n{0}-windows.zip" -f (git rev-list --count HEAD)
-- ps: $env:FILE_TO_UPLOAD = "{0}\{1}" -f $env:APPVEYOR_BUILD_FOLDER, $env:FILE_TO_UPLOAD_RELATIVE
+- ps: $env:FILE_TO_UPLOAD_NAME = "fake-n{0}-windows.zip" -f (git rev-list --count HEAD)
+- ps: $env:FILE_TO_UPLOAD_RELATIVE = "build\{0}" -f $env:FILE_TO_UPLOAD_NAME
+- ps: $env:FILE_TO_UPLOAD_ABSOLUTE = "{0}\{1}" -f $env:APPVEYOR_BUILD_FOLDER, $env:FILE_TO_UPLOAD_RELATIVE
 #- cmd: cd %APPVEYOR_BUILD_FOLDER%\build\package\addons\sourcemod\
 #- cmd: 7z a %APPVEYOR_BUILD_FOLDER%\build\%FILE_TO_UPLOAD% * 
-- cmd: 7z a %FILE_TO_UPLOAD% %APPVEYOR_BUILD_FOLDER%\file.txt
+- cmd: 7z a %FILE_TO_UPLOAD_ABSOLUTE% %APPVEYOR_BUILD_FOLDER%\file.txt
 
 artifacts:
 #- path: build\*.zip
