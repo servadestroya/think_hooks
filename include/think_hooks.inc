@@ -37,8 +37,8 @@ public __ext_think_hooks_SetNTVOptional()
 
 public Extension __ext_think_hooks = 
 {
-	name = "think_tools",
-	file = "think_tools.ext",
+	name = "think_hooks",
+	file = "think_hooks.ext",
 #if defined AUTOLOAD_EXTENSIONS
 	autoload = 1,
 #else
