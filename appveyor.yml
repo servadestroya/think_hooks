@@ -1,9 +1,8 @@
 install:
 - cmd: git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev %APPVEYOR_BUILD_FOLDER%\..\sourcemod
 - cmd: cd ..
-- cmd: dir .\sourcemod\tools\
-- cmd: dir .
-- cmd: exit 1
+- cmd: appveyor DownloadFile https://raw.githubusercontent.com/alliedmodders/sourcemod/master/tools/checkout-deps.ps1 -FileName .\checkout-deps.ps1
+- cmd: .\checkout-deps.ps1
 
 build_script:
 - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
