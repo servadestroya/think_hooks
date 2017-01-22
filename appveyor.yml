@@ -1,7 +1,7 @@
 install:
 - cmd: git clone https://github.com/alliedmodders/sourcemod.git --recursive -b 1.8-dev %APPVEYOR_BUILD_FOLDER%\..\sourcemod
 - cmd: cd ..
-- ps: sourcemod\tools\checkout-deps.ps1
+- cmd: powershell.exe -noexit -file "%APPVEYOR_BUILD_FOLDER%\..\sourcemod\tools\checkout-deps.ps1"
 
 build_script:
 - cmd: mkdir %APPVEYOR_BUILD_FOLDER%\build && cd %APPVEYOR_BUILD_FOLDER%\build
