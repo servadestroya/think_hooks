@@ -54,6 +54,8 @@ deploy:
     api_key:
         secure: ARHk8NuMUPinO/ZAbnEancK+WNS7p9/Vxs2kTdKpgFdBbS8kuHUYi7sKfmOhk615jw8xP959KcS7rnAXlEFlXG7g9uWz/Xf6+6mRUM5UOySFqbADsbkck8br0yKxaUDtMb2vUlzCwfpqg+9j/w8YG4PaepyAIpxuYptimdZlhbGgAqqqEbIc2kwchco95MDfdxZtNguZGOst/JptZjgxrnFDwiqiOREYqfqI9wIFd7WwguRfz51YtiYeCEdFNpl99BVo+PSxb5IttSkHtAKr6DK1P7CUk7/cBLhW4JKwwzO590ikfQJNDBcNPvyoaVaIHOcMVsSZAmOOK3kRtViLW9repP4NbPLhcwBJZRi6DgU02lVVl06SP6KaW+xYdO4pelPJw10fHGzq+PXb4nwwe30ucbRUNTvGpWNW7tk7dNI7nmWQbvucqv9VFeTkz9fBRIdnhvWQ0bnpkCf5sTZYHxk5Ej7wbGcj2GyB+aypwtR3XqvOYZYrFcNOHNDjsfQmB9my1YC7ZcRoZ/9GI8wlT2xikJoRH5QkBVNNmBvFgo2WWFJbrlhVynJvnt5SHuYalromsH3rD0mC1Z21rBHZ6HEIYAnQwEG2hfguIUe8yhFrC85EQJRc4rW6T4n91viSNeUr4kJdWhbrfJSJUAM9p4DPNFTZvWdBdMNn07R1w+8=
     file: $FILE
+    draft: true
+    tag: $TRAVIS_TAG
     on:
         repo: servadestroya/think_hooks
         tags: true
